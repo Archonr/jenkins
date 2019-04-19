@@ -15,7 +15,9 @@ pipeline {
             }
         }
         stage('Deploy') {
-            when { tag pattern: "release-\\d+", comparator: "REGEXP"}
+            when { 
+                branch "release-*"
+            }
             steps {
                 echo 'Deploy'
             }
