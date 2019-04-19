@@ -1,0 +1,24 @@
+#!groovy
+
+pipeline {
+    agent any
+        triggers { pollSCM('* * * * *') }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Hello world'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Test'
+            }
+        }
+        stage('Deploy') {
+            when { tag pattern: "release-\\d+", comparator: "REGEXP"}
+            steps {
+                echo 'Deploy'
+            }
+        }
+    }
+}
